@@ -9,6 +9,11 @@ namespace Tests
 {
     public class BinCoreTest
     {
+        [SetUp]
+        public void SetUP() {
+            Debug.Log("Testing  on path:" + Application.persistentDataPath);
+        }
+
         [UnityTest]
         public IEnumerator SaveLoadInt()
         {
