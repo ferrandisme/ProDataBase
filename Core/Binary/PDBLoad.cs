@@ -7,28 +7,41 @@ using NUnit.Framework;
 using System.Collections;
 using System;
 
-public class PDBLoad<E>
+public static class PDBLoad
 {
     // Start is called before the first frame update
-    public static E Load(string name)
+    public static System.Object Load(string name, System.Object def)
     {
-        return DefaultLoad(name);
+        string path = Application.persistentDataPath + "/" + name + ".pdb";
+        if (File.Exists(path)) 
+            return DefaultLoad<System.Object>(path);
+        else
+            return def;
     }
 
-    private static E DefaultLoad(string name)
+    private static E DefaultLoad<E>(string path)
     {
-        string path = Application.persistentDataPath + "/" + name + ".data";
-        if (File.Exists(path))
-        {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
             E result = (E)formatter.Deserialize(stream);
             stream.Close();
             return result;
-        }
-        else
-        {
-            throw new System.Exception("Save file not found " + path);
-        }
     }
+
+    public static Vector2 Load(string name, Vector2 def)
+    {
+        string path = Application.persistentDataPath + "/" + name + ".pdb";
+        if (File.Exists(path))
+            return LoadVector2(name);
+        else
+            return def;
+    }
+
+    public static Vector2 LoadVector2(string name)
+    {
+        string path = Application.persistentDataPath + "/" + name + ".pdb";
+        float[] pos = DefaultLoad<float[]>(path);
+        return new Vector2(pos[0], pos[1]);
+    }
+
 }

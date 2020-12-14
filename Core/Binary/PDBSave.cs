@@ -18,11 +18,18 @@ public static class PDBSave
     private static void DefaultSave<E>(string name, E item)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/" + name + ".data"; //.data is trivial and can be changed to any file type
+        string path = Application.persistentDataPath + "/" + name + ".pdb"; //.data is trivial and can be changed to any file type
+        Debug.Log("Saving on... " + path);
         FileStream stream = new FileStream(path, FileMode.Create);
         //PlayerData data = new PlayerData(player);
         formatter.Serialize(stream, item);
         stream.Close();
+    }
+
+    public static void Save(string name, Vector2 item)
+    {
+        float[] pos = new float[] { item.x, item.y };
+        DefaultSave<System.Object>(name, pos);
     }
 }
 

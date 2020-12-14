@@ -17,8 +17,8 @@ namespace Tests
         [UnityTest]
         public IEnumerator SaveLoadInt()
         {
-            PDBSave.Save("intTest", 5);
-            Assert.AreEqual(PDBLoad<int>.Load("intTest"), 5);
+            PDBSave.Save("IntTest", 5);
+            Assert.AreEqual(PDBLoad.Load("intTest", -1), 5);
             yield return null;
         }
 
@@ -26,7 +26,7 @@ namespace Tests
         public IEnumerator SaveLoadString()
         {
             PDBSave.Save("StringTest", "my Test");
-            Assert.AreEqual(PDBLoad<string>.Load("StringTest"), "my Test");
+            Assert.AreEqual(PDBLoad.Load("StringTest",""), "my Test");
             yield return null;
         }
 
@@ -34,7 +34,18 @@ namespace Tests
         public IEnumerator SaveLoadBool()
         {
             PDBSave.Save("BoolTest", false);
-            Assert.AreEqual(PDBLoad<bool>.Load("BoolTest"), false);
+            Assert.AreEqual(PDBLoad.Load("BoolTest",false), false);
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator SaveLoadVector2()
+        {
+            Vector2 vector = new Vector2(24, -39);
+            PDBSave.Save("Vector2Test", vector);
+            Vector2 newVector = PDBLoad.LoadVector2("Vector2Test");
+            Assert.AreEqual(newVector.x, vector.x);
+            Assert.AreEqual(newVector.y, vector.y);
             yield return null;
         }
     }
