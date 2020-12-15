@@ -21,7 +21,7 @@ Use guide:
 - [x] Vector3
 - [x] Transform
 - [ ] GameObject
-- [ ] Quaternion
+- [x] Quaternion
 - [ ] Color
 - [ ] Color32
 - [ ] Rect

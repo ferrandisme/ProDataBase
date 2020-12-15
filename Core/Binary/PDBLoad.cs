@@ -54,6 +54,19 @@ public static class PDBLoad
         return new Vector3(pos[0], pos[1], pos[2]);
     }
 
+    public static Quaternion Load(string name, Quaternion def)
+    {
+        if (File.Exists(GetPath(name)))
+            return LoadQuaternion(name);
+        else
+            return def;
+    }
+    public static Quaternion LoadQuaternion(string name)
+    {
+        float[] pos = DefaultLoad<float[]>(GetPath(name));
+        return new Quaternion(pos[0], pos[1], pos[2], pos[3]);
+    }
+
     public static Transform Load(string name, Transform def)
     {
         if (File.Exists(GetPath(name)))

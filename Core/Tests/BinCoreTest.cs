@@ -64,6 +64,18 @@ namespace Tests
         }
 
         [UnityTest]
+        public IEnumerator SaveLoadQuaternion()
+        {
+            Quaternion quaternion = new Quaternion(-324.2f, -339.5f, 0.1f, 0.5f);
+            PDBSave.Save("QuaternionTest", quaternion);
+            Quaternion newQuaternion = PDBLoad.LoadQuaternion("QuaternionTest");
+            Assert.AreEqual(newQuaternion.x, quaternion.x);
+            Assert.AreEqual(newQuaternion.y, quaternion.y);
+            Assert.AreEqual(newQuaternion.z, quaternion.z);
+            Assert.AreEqual(newQuaternion.w, quaternion.w);
+            yield return null;
+        }
+        [UnityTest]
         public IEnumerator SaveLoadList()
         {
             List<string> myList = new List<string>();

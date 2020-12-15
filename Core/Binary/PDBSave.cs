@@ -32,7 +32,12 @@ public static class PDBSave
         DefaultSave<float[]>(name, pos);
     }
 
-    
+    public static void Save(string name, Quaternion quaternion)
+    {
+        float[] pos = new float[] { quaternion.x, quaternion.y, quaternion.z , quaternion.w};
+        DefaultSave<float[]>(name, pos);
+    }
+
     public static void Save(string name, Transform transform)
     {
         STransform item = new STransform(transform);
