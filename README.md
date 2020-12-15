@@ -14,7 +14,7 @@ Use guide:
 -SOON, WHEN WE LEAVE ALPHA OR BETA-
 
 
-## WORK TO BE DONE AFTER FIRST RELASE
+## WORK TO BE DONE BEFORE FIRST RELASE
 
 - [x] Support for C# object
 - [x] Vector2
