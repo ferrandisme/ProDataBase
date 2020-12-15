@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -10,7 +11,8 @@ namespace Tests
     public class BinCoreTest
     {
         [SetUp]
-        public void SetUP() {
+        public void SetUP()
+        {
             Debug.Log("Testing  on path:" + Application.persistentDataPath);
         }
 
@@ -26,7 +28,7 @@ namespace Tests
         public IEnumerator SaveLoadString()
         {
             PDBSave.Save("StringTest", "my Test");
-            Assert.AreEqual(PDBLoad.Load("StringTest",""), "my Test");
+            Assert.AreEqual(PDBLoad.Load("StringTest", ""), "my Test");
             yield return null;
         }
 
@@ -34,7 +36,7 @@ namespace Tests
         public IEnumerator SaveLoadBool()
         {
             PDBSave.Save("BoolTest", false);
-            Assert.AreEqual(PDBLoad.Load("BoolTest",false), false);
+            Assert.AreEqual(PDBLoad.Load("BoolTest", false), false);
             yield return null;
         }
 
@@ -61,6 +63,21 @@ namespace Tests
             yield return null;
         }
 
+        [UnityTest]
+        public IEnumerator SaveLoadList()
+        {
+            List<string> myList = new List<string>();
+            myList.Add("hello");
+            myList.Add("DdGVdo346oOad6Gkn2xw");
+            myList.Add("");
+            PDBSave.Save("ListTest", myList);
+            List<string> newList = PDBLoad.Load<List<string>>("ListTest");
+            Assert.AreEqual(newList.Contains("hello"), true);
+            Assert.AreEqual(newList.Contains("DdGVdo346oOad6Gkn2xw"), true);
+            Assert.AreEqual(newList.Contains(""), true);
+            yield return null;
+        }
+
 
         [UnityTest]
         public IEnumerator SaveLoadTransform()
@@ -82,6 +99,33 @@ namespace Tests
             Assert.AreEqual(t.localScale.x, newTransform.localScale.x);
             Assert.AreEqual(t.localScale.y, newTransform.localScale.y);
             Assert.AreEqual(t.localScale.z, newTransform.localScale.z);
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator DeleteTest()
+        {
+            //Firt we try that the file can be saved/loaded
+            PDBSave.Save("StringTest", "my Test");
+            Assert.AreEqual(PDBLoad.Load("StringTest", ""), "my Test");
+            //Now we try that the file can be 
+            string path = Application.persistentDataPath + "/" + "StringTest" + ".pdb";
+            Assert.AreEqual(true, File.Exists(path));
+            PDBCore.Remove("StringTest");
+            Assert.AreEqual(false,File.Exists(path));
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator basicDataManager()
+        {
+            DataManager data = new DataManager("TESTDATAMANAGER");
+            data.Add("s", "hello");
+            data.Add("i", 1);
+            data.Add("b", false);
+            Assert.AreEqual(data.Get<bool>("b"), false);
+            Assert.AreEqual(data.Get<int>("i"), 1);
+            Assert.AreEqual(data.Get<string>("s"), "hello");
             yield return null;
         }
     }

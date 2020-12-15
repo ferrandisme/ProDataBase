@@ -6,11 +6,11 @@ using UnityEditor.UIElements;
 using NUnit.Framework;
 using System.Collections;
 using System;
-using static PDBSave;
+using static PDBCore;
 
 public static class PDBLoad
 {
-    public static String GetPath(String name)
+    public static String GetPath(string name)
     {
         return Application.persistentDataPath + "/" + name + ".pdb";
     }
@@ -22,13 +22,8 @@ public static class PDBLoad
             return def;
     }
 
-    private static E DefaultLoad<E>(string path)
-    {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-            E result = (E)formatter.Deserialize(stream);
-            stream.Close();
-            return result;
+    public static E Load<E>(string name) {
+          return DefaultLoad<E>(GetPath(name));       
     }
 
     public static Vector2 Load(string name, Vector2 def)
