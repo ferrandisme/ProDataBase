@@ -140,5 +140,18 @@ namespace Tests
             Assert.AreEqual(data.Get<string>("s"), "hello");
             yield return null;
         }
+
+        [UnityTest]
+        public IEnumerator SaveLoadColor()
+        {
+            Color color = new Color(0.3f, 0.4f, 0.6f, 0.3f);
+            PDBSave.Save("ColorTest", color);
+            Color newColor = PDBLoad.LoadColor("ColorTest");
+            Assert.AreEqual(color.r, newColor.r);
+            Assert.AreEqual(color.g, newColor.g);
+            Assert.AreEqual(color.b, newColor.b);
+            Assert.AreEqual(color.a, newColor.a);
+            yield return null;
+        }
     }
 }

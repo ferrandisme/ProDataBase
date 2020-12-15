@@ -44,5 +44,13 @@ public static class PDBSave
         DefaultSave<STransform>(name, item);
     }
 
+    public static void Save(string name, Color color)
+    {
+        float[] colors = new float[4];
+        colors[0] = color.r; colors[1] = color.g; colors[2] = color.b; colors[3] = color.a;
+        DefaultSave<float[]>(name, colors);
+    }
+
+
 }
 

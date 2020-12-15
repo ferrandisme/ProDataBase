@@ -22,7 +22,7 @@ Use guide:
 - [x] Transform
 - [ ] GameObject
 - [x] Quaternion
-- [ ] Color
+- [x] Color
 - [ ] Color32
 - [ ] Rect
 

@@ -86,5 +86,18 @@ public static class PDBLoad
         return t;
     }
 
-    
+    public static Color Load(string name, Color def)
+    {
+        if (File.Exists(GetPath(name)))
+            return LoadColor(name);
+        else
+            return def;
+    }
+    public static Color LoadColor(string name)
+    {
+        float[] colors = DefaultLoad<float[]>(GetPath(name));
+        return new Color(colors[0], colors[1], colors[2], colors[3]);
+    }
+
+
 }
