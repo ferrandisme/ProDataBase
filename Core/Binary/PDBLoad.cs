@@ -99,5 +99,18 @@ public static class PDBLoad
         return new Color(colors[0], colors[1], colors[2], colors[3]);
     }
 
+    public static Color Load(string name, Color32 def)
+    {
+        if (File.Exists(GetPath(name)))
+            return LoadColor32(name);
+        else
+            return def;
+    }
+    public static Color LoadColor32(string name)
+    {
+        byte[] colors = DefaultLoad<byte[]>(GetPath(name));
+        return new Color(colors[0], colors[1], colors[2], colors[3]);
+    }
+
 
 }

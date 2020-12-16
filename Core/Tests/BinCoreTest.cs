@@ -153,5 +153,18 @@ namespace Tests
             Assert.AreEqual(color.a, newColor.a);
             yield return null;
         }
+
+
+        public IEnumerator SaveLoadColor32()
+        {
+            Color32 color = new Color32(64, 128, 192, 255);
+            PDBSave.Save("ColorTest32", color);
+            Color32 newColor = PDBLoad.LoadColor("Color32Test");
+            Assert.AreEqual(color.r, newColor.r);
+            Assert.AreEqual(color.g, newColor.g);
+            Assert.AreEqual(color.b, newColor.b);
+            Assert.AreEqual(color.a, newColor.a);
+            yield return null;
+        }
     }
 }

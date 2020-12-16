@@ -23,6 +23,6 @@ Use guide:
 - [ ] GameObject
 - [x] Quaternion
 - [x] Color
-- [ ] Color32
+- [x] Color32
 - [ ] Rect
 

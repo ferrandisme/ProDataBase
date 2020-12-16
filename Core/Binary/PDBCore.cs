@@ -29,6 +29,12 @@ public static class PDBCore
         return result;
     }
 
+    public static void Remove(string name)
+    {
+        string path = Application.persistentDataPath + "/" + name + ".pdb";
+        File.Delete(path);
+    }
+
     [System.Serializable]
     public struct STransform //add parent?
     {
@@ -42,9 +48,4 @@ public static class PDBCore
         }
     }
 
-    public static void Remove(string name)
-    {
-        string path = Application.persistentDataPath + "/" + name + ".pdb";
-        File.Delete(path);
-    }
 }

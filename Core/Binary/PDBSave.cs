@@ -51,6 +51,13 @@ public static class PDBSave
         DefaultSave<float[]>(name, colors);
     }
 
+    public static void Save(string name, Color32 color)
+    {
+        byte[] colors = new byte[4];
+        colors[0] = color.r; colors[1] = color.g; colors[2] = color.b; colors[3] = color.a;
+        DefaultSave<byte[]>(name, colors);
+    }
+
 
 }
 
